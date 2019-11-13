@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Style GAN Demo</title>
+        <meta charset="utf-8">
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        <link href="../static/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="mt-4 ml-16 mr-16 flex flex-col">
+            <div class="mb-8">
+                <h1 class="mb-4">Medical College of Wisconsin Style GAN Demo</h1>
+                <h2 class="mb-4">Lead by: Peter LaViollete PhD. & Josiah Yoder PhD.</h2>
+                <h3 class="mb-">
+                    With Special Apperances: George Burkahrdt, Gagan Daroach, 
+                    Emma Ruder, & Blaine Venturine
+                </h3>
+            </div>
+            <div class="flex flex-1">
+                <img id="demo-image" class="rounded mr-4" src="https://via.placeholder.com/500?text=Please+Click+Generate+Image"/>
+                <div class="flex flex-1 flex-col">
+                    <label class="flex items-center mb-4">
+                        <span class="mr-4">Seed</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0.146" step="0.001" oninput="handleSliderChange()">
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label>
+                    <label class="flex items-center mb-4">
+                        <span class="mr-4">	&sigma;</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0.83" step="0.001" oninput="handleSliderChange()">
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label>
+                    <label class="flex items-center mb-4">
+                        <span class="mr-4">	&sigma; Scalar</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0.954" step="0.001" oninput="handleSliderChange()">
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label>
+                    <label class="flex items-center mb-4">
+                        <span class="mr-4">&mu;</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0.156" step="0.001" oninput="handleSliderChange()">
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label>
+                    <label class="flex items-center mb-4">
+                        <span class="mr-4">&mu; Scalar</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0.234" step="0.001" oninput="handleSliderChange()">                        
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label>
+                    <!-- <label class="flex items-center mb-4">
+                        <span class="mr-4">Lablel 6</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0" step="0.001" oninput="handleSliderChange()">                        
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label>
+                    <label class="flex items-center mb-4">
+                        <span class="mr-4">Lablel 7</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0" step="0.001" oninput="handleSliderChange()">                        
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label>
+                    <label class="flex items-center mb-4">
+                        <span class="mr-4">Lablel 8</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0" step="0.001" oninput="handleSliderChange()">                        
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label>
+                    <label class="flex items-center mb-4">
+                        <span class="mr-4">Lablel 9</span>
+                        <input class="flex-1" type="range" min="0" max="1" value="0" step="0.001" oninput="handleSliderChange()">                        
+                        <span class="slider-value ml-4 w-4">0</span>
+                    </label> -->
+                    <button id="generate-button" class="bg-purple-500 rounded text-white w-48 p-2 hover:bg-purple-700 self-end mt-auto" onclick="loadImage()">Generate Image</button>
+                </div>
+            </div>
+        </div>
+        <script src="../static/index.js"></script>
+    </body>
+</html>

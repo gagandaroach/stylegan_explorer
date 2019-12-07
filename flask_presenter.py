@@ -7,8 +7,7 @@
 # imports
 #
 import os
-import io
-from flask import Flask, render_template, request, Response, send_file
+from flask import Flask, render_template, request
 import pickle
 import scipy
 import numpy as np
@@ -53,29 +52,36 @@ def get_gs():
 #
 # methods
 
-def _handle_stylegan_generate_image_click(slider_values, blob_image, generateNewImage=True):
+def _handle_stylegan_generate_image_click(slider_values, generateNewImage=True):
     '''
     @params generateNewImage if true, try to use tensorflow generator. if false, use static route (test_img_src) on api call.
     '''
     if generateNewImage:
-        generate_random_png(slider_values, blob_image, random=True)
+        full_path = generate_random_png(slider_values, random=True)
+    else:
+        full_path = test_img_src
 
+    trimmed_path = trim_out_full_path(full_path)
+    print('_handle_stylegan_generate_image_click returning: %s' % trimmed_path)
+    return trimmed_path #todo, add full path, generate time in json obj here for return
 
-def generate_random_png(slider_values, blob_image, seed=seed, random=True):
+def generate_random_png(slider_values, seed=seed, random=True):
         if random:
             input_seed = int(slider_values[0]*1000)
             seed = (np.random.RandomState(input_seed).rand(1)*1000).astype('int')
+        filename = f'output_{str(seed)}_{slider_values[1]}_{slider_values[2]}_{slider_values[3]}_{slider_values[4]}.png' # seed, sigma, mu
         Gs = get_gs()
-        _make_png(blob_image, Gs, slider_values, seed=seed)
+        return _make_png(os.path.join(output_dir, filename), Gs, slider_values, seed=seed)
 
-def _make_png(image_object, Gs, slider_values, cx=0, cy=0, cw=1024, ch=1024, seed = seed):
-    print('attempting to create png')
+def _make_png(png_path, Gs, slider_values, cx=0, cy=0, cw=1024, ch=1024, seed = seed):
+    print('attempting to create png at %s' % png_path)
     latents = make_latents(Gs, seed, slider_values)
     images = Gs.run(latents, None, **synthesis_kwargs) # [seed, y, x, rgb]
     print(f'length of generated images vector: {len(images)}')
     image = PIL.Image.fromarray(images[0], 'RGB') # https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.fromarray
-    image.save(image_object, format="PNG")
+    image.save(png_path)
     print('success')
+    return png_path
 
 def make_latents(Gs, seed, slider_values):
   sigma_scaler = slider_values[2]

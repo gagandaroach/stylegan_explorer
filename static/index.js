@@ -9,12 +9,9 @@ function loadImage() {
         body: JSON.stringify(sliderValues)
     };
     fetch("/api", apiPostOptions)
-        .then(response => response.blob())
-        .then(blob => {
-            console.log(blob);
-            const blobUrl = URL.createObjectURL(blob);
-            console.log(blobUrl);
-            document.getElementById("demo-image").src = blobUrl;
+        .then(response => response.text())
+        .then(text => {
+            document.getElementById("demo-image").src = text;
             setButtonDisabled(false);
         });
 }

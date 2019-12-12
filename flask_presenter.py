@@ -12,7 +12,8 @@ import pickle
 import scipy
 import numpy as np
 import tensorflow as tf
-import PIL.Image
+# import PIL.Image
+import Image
 import dnnlib # local nvidia module
 from dnnlib import tflib as tflib
 

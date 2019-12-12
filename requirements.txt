@@ -1,0 +1,6 @@
+Pillow
+flask
+requests
+numpy
+tensorflow=1.15
+scipy

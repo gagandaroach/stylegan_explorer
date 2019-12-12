@@ -2,6 +2,7 @@
 #
 # Milwaukee School of Engineering and Medical College of Wisconsin
 # Collaborative Research
+#
 # Gagan Daroach <gagandaroach@gmail.com>
 
 #
@@ -13,10 +14,7 @@ import scipy
 import numpy as np
 import tensorflow as tf
 from flask import Flask, render_template, request
-
-# Note: This import depends on how PIL is installed on your system.
-# import PIL.Image
-import Image
+from PIL import Image
 
 # Import Nvidia StyleGAN Network Libraries
 import dnnlib
